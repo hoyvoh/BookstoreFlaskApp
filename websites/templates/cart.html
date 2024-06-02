@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+        }
+        .cart-container {
+            width: 80%;
+            margin: auto;
+            background-color: rgb(51, 51, 51);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        h1 {
+            border-bottom: 2px solid #f5f5f5;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .product-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .product-info span {
+            font-size: 16px;
+        }
+        .product-info .price {
+            color: #ff5722;
+            font-weight: bold;
+        }
+        button {
+            background-color: #ff5722;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #e64a19;
+        }
+    </style>
+</head>
+<body>
+    <div class="back-button"><a href="{{ url_for('views.category') }}">Back</a></div>
+    <button class="add-book-button"><a href="{{ url_for('views.cart') }}" class="cart-button">Cart</a></button>
+    <button class="add-book-button"><a href="{{ url_for('views.invoices') }}" class="cart-button">Invoices</a></button>
+    <div class="cart-container">
+        
+        <h1>Cart</h1>
+
+        <form method="POST">
+            <ul>
+                {% for item in cart_items %}
+                    <li>
+                        <input type="checkbox" name="product" value="{{ item.pid }}">
+                        <div class="product-info">
+                            <span>Product: {{ item.pid }}</span>
+                            <span class="price">Unit Price: {{ item.unit_price }}</span>
+                            <span>Quantity: {{ item.quantity }}</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <button type="submit">Purchase</button>
+        </form>
+    </div>
+</body>
+{% endblock %}

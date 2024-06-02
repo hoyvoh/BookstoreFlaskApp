@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Invoice Details{% endblock %}
+
+{% block content %}
+<head>
+    <style>
+        .invoice-details-container {
+            width: 80%;
+            margin: auto;
+            background-color: #2c2c2c;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        h1 {
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .product-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .product-item {
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .product-item:last-child {
+            border-bottom: none;
+        }
+        .product-info {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="back-button"><a href="{{ url_for('views.category') }}">Back</a></div>
+    <button class="add-book-button"><a href="{{ url_for('views.cart') }}" class="cart-button">Cart</a></button>
+    <button class="add-book-button"><a href="{{ url_for('views.invoices') }}" class="cart-button">Invoices</a></button>
+    <div class="invoice-details-container">
+        <h1>Invoice Details</h1>
+        {% if invoice %}
+            {% for inv in invoice %}
+                <div>
+                    <span>Invoice ID: {{ inv.inid }}</span>
+                    <span>Username: {{ inv.username }}</span>
+                    <span>Total Amount: {{ inv.total_amount }}</span>
+                    <span>Date Created: {{ inv.date_created }}</span>
+                </div>
+                <h2>Products</h2>
+                <ul class="product-list">
+                    {% for item in products %}
+                        <li class="product-item">
+                            <div class="product-info">
+                                <span>Product ID: {{ item.pid }}</span>
+                                <span>Unit Price: {{ item.unit_price }}</span>
+                                <span>Quantity: {{ item.quantity }}</span>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        {% else %}
+            <p>No invoice found.</p>
+        {% endif %}
+    </div>
+</body>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Invoice List{% endblock %}
+
+{% block content %}
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+        }
+        .invoice-container {
+            width: 80%;
+            margin: auto;
+            background-color: rgb(51, 51, 51);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        h1 {
+            border-bottom: 2px solid #f5f5f5;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .invoice-panel {
+            padding: 10px;
+            border: 1px solid #f5f5f5;
+            margin-bottom: 20px;
+        }
+        .invoice-panel span {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .invoice-panel .price {
+            color: #ff5722;
+            font-weight: bold;
+        }
+        .product-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        .product-item {
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .product-item:last-child {
+            border-bottom: none;
+        }
+        .product-info {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="back-button"><a href="{{ url_for('views.category') }}">Back</a></div>
+    <button class="add-book-button"><a href="{{ url_for('views.cart') }}" class="cart-button">Cart</a></button>
+    <button class="add-book-button"><a href="{{ url_for('views.invoices') }}" class="cart-button">Invoices</a></button>
+    <div class="invoice-container">
+        <h1>Invoice List</h1>
+        {% for invoice in invoices %}
+            {% if invoice.purchase_status %}
+                <a href="{{ url_for('views.invoice_details', invoice_id=invoice.inid) }}">
+                    <div class="invoice-panel">
+                        <span>Invoice ID: {{ invoice.inid }}</span>
+                        <span>Username: {{ invoice.username }}</span>
+                        <span>Total Amount: <span class="price">{{ invoice.total_amount }}</span></span>
+                        <span>Date Created: {{ invoice.date_created }}</span>
+                    </div>
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</body>
+{% endblock %}

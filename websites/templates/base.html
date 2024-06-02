@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+      body {
+  font-family: Arial, sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: #ffffff;
+  font-family:sans-serif;
+}
+
+#products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.product {
+  display: inline-block;
+  width: 200px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #161616;
+  text-align: center;
+  border-radius: 5px;
+  transition: box-shadow 0.3s ease;
+  font-family:sans-serif;
+}
+
+.product:hover {
+  box-shadow: 0 0 10px rgba(32, 32, 32, 0.2);
+}
+
+.product img {
+  max-width: 100%;
+  height: auto;
+}
+
+.product h3 {
+  font-size: 18px;
+  margin: 10px 0;
+  text-align: left;
+  font-family:sans-serif;
+  color: #ffffff;
+}
+
+.product h4, .product h5, .product p {
+  font-size: 14px;
+  margin: 5px 0;
+  text-align: left;
+  font-family:sans-serif;
+  color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #0056b3; /* Darker background color on hover */
+}
+
+.back-button:focus {
+    outline: none; /* Remove focus outline */
+}
+
+.comment-section {
+  margin-top: 20px;
+}
+
+.comment-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.comment-item {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.comment-title {
+  font-weight: bold;
+}
+
+.comment-content {
+  margin-top: 5px;
+}
+
+.comment-user {
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.comment-rating {
+  margin-top: 10px;
+}
+
+.comment-thank-count {
+  margin-top: 10px;
+  color: #888;
+}
+
+/* Add this to your existing CSS */
+.add-to-cart-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745; /* Green background */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart-button:hover {
+    background-color: #218838; /* Darker green background on hover */
+}
+
+.add-to-cart-button:focus {
+    outline: none; /* Remove focus outline */
+}
+
+/* Add this to your existing CSS */
+.add-book-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745; /* Green background */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px 0; /* Add margin to separate from other elements */
+}
+
+.add-book-button:hover {
+    background-color: #218838; /* Darker green background on hover */
+}
+
+.add-book-button:focus {
+    outline: none; /* Remove focus outline */
+}
+
+#add-book-form {
+    background-color: #161616; /* Dark background color */
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0; /* Add margin to separate from other elements */
+}
+
+#add-book-form input[type="text"],
+#add-book-form input[type="number"],
+#add-book-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+}
+
+#add-book-form input[type="submit"] {
+    background-color: #007bff; /* Blue background */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#add-book-form input[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue background on hover */
+}
+
+#add-book-form input[type="submit"]:focus {
+    outline: none; /* Remove focus outline */
+}
+
+  </style>
+    <title>{% block title %}Home{% endblock %}</title>
+  </head>
+
+  <body>
+    {% block content %}{% endblock %}
+  </body>
+</html>

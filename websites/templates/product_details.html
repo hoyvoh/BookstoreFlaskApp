@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.get('TITLE') }}{% endblock %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+}
+
+.product-detail-container {
+    display: flex;
+    flex-direction: row;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #000000;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(68, 68, 68, 0.1);
+}
+
+.product-image {
+    flex: 1;
+    max-width: 500px;
+    padding: 20px;
+}
+
+.product-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product-details {
+    flex: 2;
+    padding: 20px;
+}
+
+.product-details h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #ffffff;
+    border-radius: 30px;
+    text-align: left;
+}
+
+.product-author {
+    font-size: 1.2em;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.product-price {
+    font-size: 1.8em;
+    color: #e60023;
+    margin-bottom: 20px;
+}
+
+.product-description,
+.comment-summary {
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.product-description h2,
+.comment-summary h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.tag-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.product-description p,
+.comment-summary p {
+    font-size: 1em;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.product-tag {
+    display: inline-block;
+    padding: 5px 5px;
+    border-radius: 20px; 
+    background: linear-gradient(to right, #2200b9, #890f9ffc, rgb(208, 107, 0)); 
+    color: #fff; 
+    font-size: 12px;
+    text-transform: uppercase;
+    margin: 5px; 
+    border: 1px transparent transparent;
+    transition: border-color 0.3s ease; 
+}
+
+.pie-chart {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.slice {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  clip: rect(0, 100px, 200px, 0);
+  border-radius: 50%;
+  transform: rotate(var(--rotate));
+}
+
+#slice1 {
+  background-color: green;
+  transform: rotate(20deg);
+}
+
+#slice2 {
+  background-color: blue; 
+  transform: rotate(120deg);
+}
+
+#slice3 {
+  background-color: red;
+  transform: rotate(240deg);
+}
+
+.recommended-products {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recommended-product {
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+    </style>
+    
+</head>
+<body>
+    <div class="back-button"><a href="{{ url_for('views.category') }}">Back</a></div>
+        <button class="add-book-button"><a href="{{ url_for('views.cart') }}" class="cart-button">Cart</a></button>
+        <button class="add-book-button"><a href="{{ url_for('views.invoices') }}" class="cart-button">Invoices</a></button>
+
+    <div class="product-detail-container">
+        <div class="product-image">
+            <img src="./static/750578.jpg" alt="{{ product.get('TITLE') }}">
+        </div>
+        <div class="product-details">
+            <h1 id="product-title">{{ product.get('title', 'Tiêu đề') }}</h1>
+            <p class="product-author">Author: <span id="product-author"> {{product.get('author', 'Nhiều tác giả')}} </span></p>
+            <p class="product-price" id="product-price">₫{{ product.get('price', 0) }}</p>
+            <div class="product-description" id="product-description">
+                <h2>Description</h2>
+                <p>
+                    {{ product.get('description', 'No Description') }}
+                </p>
+            </div>
+        
+        </div>
+        
+    </div>
+
+    
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %}Catalog{% endblock %}
+
+{% block content %}
+<head>
+    <style>
+        .add-book-button {
+            background-color: green;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        .add-book-button:hover {
+            background-color: darkgreen;
+        }
+
+        .delete-product-button {
+            background-color: red;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .delete-product-button:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+
+<body>
+    
+
+    <h1>Catalog</h1>
+    <button class="add-book-button" onclick="showAddBookForm()">Add Book</button>
+    <button class="add-book-button"><a href="{{ url_for('views.cart') }}" class="cart-button">Cart</a></button>
+    <button class="add-book-button"><a href="{{ url_for('views.invoices') }}" class="cart-button">Invoices</a></button>
+    <div id="add-book-form" style="display: none;">
+        <form action="{{ url_for('views.add_product') }}" method="post" onsubmit="return validateForm()">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required><br>
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required><br>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required><br>
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" required><br>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea><br>
+            <label for="date_created">Date Created:</label>
+            <input type="text" id="date_created" name="date_created" readonly><br>
+            <input type="submit" value="Add Book">
+            <button class="add-book-button" type="reset" onclick="closeForm()">Close Form</button>
+        </form>
+    </div>
+  <div id="products">
+    {% for product in products %}
+      <div class="product">
+        <a href="{{ url_for('views.product_details', product_id=product.get('pid')) }}">
+            <img src="../static/750578.jpg" alt="">
+            <h3>{{ product.get('title', 'Unnamed Product') }}</h3>
+        </a>
+        <h4>Author: {{ product.get('author') }}</h4>
+        <h4>Price: {{ product.get('price') }}</h4>
+        <p>Quantity: {{ product.get('quantity') }}</p>
+        <p>Date Created: {{ product.get('date_created') }}</p>
+        <form action="{{ url_for('views.add_to_cart') }}" method="post">
+            <input type="hidden" name="product_id" value="{{ product.get('pid') }}">
+            <button type="submit" class="add-to-cart-button">Add to Cart</button>
+        </form>
+        <form action="{{ url_for('views.delete_product') }}" method="post">
+            <input type="hidden" name="product_id" value="{{ product.get('pid') }}">
+            <button type="submit" class="delete-product-button">Delete</button>
+        </form>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="pagination">
+    {% if page > 1 %}
+      <a class="back-button" href="/?page={{ page - 1 }}">Previous</a>
+    {% endif %}
+    <a class="back-button" href="/?page={{ page + 1 }}">Next</a>
+  </div>
+
+  <script>
+    function showAddBookForm() {
+            document.getElementById('add-book-form').style.display = 'block';
+            document.getElementById('date_created').value = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        }
+
+        function validateForm() {
+            let title = document.getElementById('title').value;
+            let author = document.getElementById('author').value;
+            let description = document.getElementById('description').value;
+            let price = parseFloat(document.getElementById('price').value);
+            
+            if (title.length < 5 || author.length < 5 || description.length < 5) {
+                alert('All fields must be at least 5 characters long.');
+                return false;
+            }
+            
+            if (isNaN(price) || price <= 0) {
+                alert('Price must be a number greater than 0.');
+                return false;
+            }
+
+            return true;
+        }
+        function closeForm() {
+            // Find the form element by its ID
+        var form = document.getElementById("add_product_form");
+        // Loop through each form element and hide it
+        var formElements = form.elements;
+        for (var i = 0; i < formElements.length; i++) {
+            formElements[i].style.display = "none";
+        }
+        // Optional: Hide or remove the close button
+        document.querySelector('button[type="button"]').style.display = "none";
+        }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+</body>
+{% endblock %}

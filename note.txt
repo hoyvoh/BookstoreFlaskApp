@@ -1,0 +1,29 @@
+<< Assignment 6 >>
+This is a basic flask application that made use of Python, Flask and SQLite
+to create a basic route for an e-commerce website. 
+---
+This basic flask app aims to:
+- Load product info to models from a csv file
+- Display them as a category
+- Provide a pop up form to insert a new product;
+>> Trigger: check if product title exist, if exist, roll back, wont allow insert
+>> Trigger: check if any field empty, prevent insert
+>> Trigger: check input values
+- Provide a form to insert a list of new products from csv file, same constraints
+- Can edit product details
+- Can add product to cart
+- When hit buy button, the chosen products are put to Invoice
+- Can delete product
+
+<< Views:
+- catalog
+- product details
+- cart
+- invoice list
+- invoice details
+
+<< models:
+- product (pid, title, price, author, description)
+- invoice (inid, userid, total_amount, purchase status, date)
+- invoice details (inid, pid, unit_price, quantity)
+
