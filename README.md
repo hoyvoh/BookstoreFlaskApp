@@ -1,8 +1,8 @@
 # << Assignment 6 >>
 
-* This is a basic flask application that made use of Python, Flask and SQLite to create a basic route for an e-commerce website. *
+*This is a basic flask application that made use of Python, Flask and SQLite to create a basic route for an e-commerce website.*
 
-Check this demo video: [Demo](https://drive.google.com/file/d/1AUQM78yfnT8Ih7AVW6CBpm4oiD7gF0rf/view?usp=sharing)
+Check this demo video: [Demo](https://drive.google.com/file/d/1Iz_4TIvTeJHPH5xXiE9IZZHmCPjuenxc/view?usp=sharing)
 
 ## This basic flask app aims to:
 - Load product info to models from a csv file
